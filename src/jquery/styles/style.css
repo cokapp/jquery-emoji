@@ -1,3 +1,20 @@
-.cok-smilies-wrapper{
+.cok-hidden{
+	display: none;
+}
+.cok-show{
+	display: block;
+}
+
+
+.cok-emoji-wrapper{
+	position: absolute;
+	background: #eee;
+	border: 1px solid #ccc;
+	top: 100px;
+	left: 100px;
+	z-index: 1000;
+}
+
+.cok-emoji-wrapper .tab-nav{
 	
 }

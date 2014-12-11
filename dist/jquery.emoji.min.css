@@ -1,0 +1,6 @@
+/*!
+ * Jquery Emoji 1.1.0
+ * Copyright 2014 cokapp (http://cokapp.com)
+ * Licensed under MIT (http://opensource.org/licenses/MIT)
+ */
+.cok-hidden{display:none}.cok-show{display:block}.cok-emoji-wrapper{position:absolute;background:#eee;border:1px solid #ccc;top:100px;left:100px;z-index:1000}

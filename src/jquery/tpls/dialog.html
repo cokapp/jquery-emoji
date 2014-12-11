@@ -40,7 +40,7 @@ var config = {
 -->
 
 
-<div class="cok-smilies-wrapper cok-hidden">
+<div class="cok-emoji-wrapper cok-hidden">
     <ul class="tab-nav">
     	{{each tabs as tab index}}
  		<li class="tab-item active">
@@ -52,10 +52,10 @@ var config = {
     <div class="tab-content">
     	{{each tabs as tab index}}
         	<div class="tab-pane active" data-tab="{{tab.name}}">
-        		<ul class="smilies">
+        		<ul class="emojis">
                 	{{each smilies[tab.name] as smily index}}
-                		 <li data-emoji="{{smily.emoji}}" >
-                		 	<img src="{{basePath}}/{{smily.image}}" alt="{{image.title}}" title="{{image.title}}">
+                		 <li data-emoji="{{smily.emoji}}" class="emoji">
+                		 	<img src="{{basePath}}/{{smily.image}}" alt="{{smily.title}}" title="{{smily.title}}">
                 		 </li>
                 	{{/each}}
         		</ul>

@@ -1,62 +1,13 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        banner:
-            '/*!\n'+
-            ' * Jquery Emoji <%= pkg.version %>\n'+
-            ' * Copyright <%= grunt.template.today("yyyy") %> cokapp (http://cokapp.com)\n'+
-            ' * Licensed under MIT (http://opensource.org/licenses/MIT)\n'+
-            ' */',
+        banner: '/*!\n' + ' * Jquery Emoji <%= pkg.version %>\n' + ' * Copyright <%= grunt.template.today("yyyy") %> cokapp (http://cokapp.com)\n' + ' * Licensed under MIT (http://opensource.org/licenses/MIT)\n' + ' */',
 
         // create output dirs
         mkdir: {
             all: {
                 options: {
-                    create: ['temp', 'dist']
-                }
-            }
-        },
-
-        // inject smilies config in js file
-        replace: {
-            js: {
-                options: {
-                    usePrefix: false,
-                    patterns: [{
-                        match: "smiliesConfig.main",
-                        replacement: '"<%= config.main %>"'
-                    }, {
-                        match: "smiliesConfig.shorts",
-                        replacement: '<%= config.shorts %>'
-                    }, {
-                        match: "smiliesConfig.smilies",
-                        replacement:
-                            grunt.file.expandMapping('src/smilies/*.png', '', {
-                                flatten: true, ext: ''
-                            })
-                            .map(function(file) {
-                                return file.dest;
-                            })
-                    }]
-                },
-                files: {
-                    'temp/angular-smilies.js': [
-                        'src/angular-smilies.js'
-                    ]
-                }
-            },
-            css: {
-                options: {
-                    usePrefix: false,
-                    patterns: [{
-                        match: 'angular-smilies.png',
-                        replacement: 'data:image/png;base64,<%= grunt.file.read("temp/angular-smilies.png.b64") %>'
-                    }]
-                },
-                files: {
-                    'temp/smilies-sprite-embed.css': [
-                        'temp/smilies-sprite.css'
-                    ],
+                    create: ['dist']
                 }
             }
         },
@@ -71,16 +22,12 @@ module.exports = function(grunt) {
             },
             src: {
                 files: {
-                    'dist/angular-smilies.css': [
-                        'src/angular-smilies.css',
-                        'temp/smilies-sprite.css'
+                    'dist/jquery.emoji.css': [
+                        'src/jquery/styles/**.css'
                     ],
-                    'dist/angular-smilies-embed.css': [
-                        'src/angular-smilies.css',
-                        'temp/smilies-sprite-embed.css'
-                    ],
-                    'dist/angular-smilies.js': [
-                        'temp/angular-smilies.js'
+                    'dist/jquery.emoji.js': [
+                        'src/jquery/scripts/tpls/*.js',
+                        'src/jquery/scripts/**/*.js'
                     ]
                 }
             }
@@ -92,8 +39,8 @@ module.exports = function(grunt) {
                 banner: '<%= banner %>\n'
             },
             build: {
-                src: 'dist/angular-smilies.js',
-                dest: 'dist/angular-smilies.min.js'
+                src: 'dist/jquery.emoji.js',
+                dest: 'dist/jquery.emoji.min.js'
             }
         },
 
@@ -105,39 +52,65 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'dist/angular-smilies.min.css': [
-                        'dist/angular-smilies.css'
-                    ],
-                    'dist/angular-smilies-embed.min.css': [
-                        'dist/angular-smilies-embed.css'
+                    'dist/jquery.emoji.min.css': [
+                        'dist/jquery.emoji.css'
                     ]
                 }
             }
         },
 
+        // copy images
+        copy: {
+            images: {
+                expand: true,
+                cwd: 'src/jquery/images/',
+                src: '**',
+                dest: 'dist/images/'
+            },
+            demo: {
+                expand: true,
+                cwd: 'src/demo/',
+                src: '**',
+                dest: 'dist/demo/'
+            }
+        },
+
+        tmod: {
+            template: {
+                syntax: 'simple',
+                src: 'src/jquery/tpls/**/*.html',
+                dest: 'src/jquery/scripts/tpls/template.js',
+                options: {
+                    base: 'src/jquery/tpls',
+                    combo: true
+                } 
+            }
+        },
+
+
         // remove temp dir
         clean: {
-            temp: ['temp']
+            dist: ['dist']
         }
     });
 
     grunt.loadNpmTasks('grunt-mkdir');
-    grunt.loadNpmTasks('node-sprite-generator');
     grunt.loadNpmTasks('grunt-base64');
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-tmod');
 
     grunt.registerTask('default', [
+        'clean',        
         'mkdir',
-        'spriteGenerator',
-        'base64',
-        'replace',
+        'tmod',
         'concat',
-        'uglify',
         'cssmin',
-        'clean'
+        'uglify',
+        'copy'
     ]);
 };
