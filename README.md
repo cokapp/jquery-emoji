@@ -1,4 +1,2 @@
-jquery-smilies
-==============
-
-a easy way to send smily
+#Angular颜文字
+##Coming Soon...

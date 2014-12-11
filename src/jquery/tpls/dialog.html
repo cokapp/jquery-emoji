@@ -1,0 +1,65 @@
+<!--
+表情显示模板
+数据：
+
+var config = {
+    basePath: 'images/smilies/',
+    tabs: [{
+        name: 'ywz',
+        title: '颜文字'
+    }, {
+        name: 'tsj',
+        title: '兔斯基'
+    }],
+    smilies: {
+        ywz: [{
+            emoji: ':biggrin:',
+            title: '大笑',
+            image: 'emoji/biggrin.png'
+        }, {
+            emoji: ':confused:',
+            title: '反对',
+            image: 'emoji/confused.png'
+        }, {
+            emoji: ':cool:',
+            title: '超酷',
+            image: 'emoji/cool.png'
+        }],
+        tsj: [{
+            emoji: ':t_0001:',
+            title: '滚蛋',
+            image: 'tsj/t_0001.gif'
+        }, {
+            emoji: ':t_0002:',
+            title: '神马',
+            image: 'tsj/t_0002.gif'
+        }]
+    }
+}
+
+-->
+
+
+<div class="cok-smilies-wrapper cok-hidden">
+    <ul class="tab-nav">
+    	{{each tabs as tab index}}
+ 		<li class="tab-item active">
+ 			<a href="javascript:;" hidefocus="true">{{tab.title}}</a>
+        </li>
+    	{{/each}}
+        <li class="tab-placeholder"></li>
+    </ul>
+    <div class="tab-content">
+    	{{each tabs as tab index}}
+        	<div class="tab-pane active" data-tab="{{tab.name}}">
+        		<ul class="smilies">
+                	{{each smilies[tab.name] as smily index}}
+                		 <li data-emoji="{{smily.emoji}}" >
+                		 	<img src="{{basePath}}/{{smily.image}}" alt="{{image.title}}" title="{{image.title}}">
+                		 </li>
+                	{{/each}}
+        		</ul>
+        	</div>
+    	{{/each}}
+    </div>
+</div>
