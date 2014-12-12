@@ -42,24 +42,34 @@ var config = {
 
 <div class="cok-emoji-wrapper cok-hidden">
     <ul class="tab-nav">
-    	{{each tabs as tab index}}
- 		<li class="tab-item active">
+    	{{each tabs as tab tabIndex}}
+ 		<li class="tab-item {{if tabIndex==0}} active {{/if}}">
  			<a href="javascript:;" hidefocus="true">{{tab.title}}</a>
         </li>
     	{{/each}}
-        <li class="tab-placeholder"></li>
+        <li class="tab-placeholder cok-clearfix"></li>
     </ul>
     <div class="tab-content">
-    	{{each tabs as tab index}}
-        	<div class="tab-pane active" data-tab="{{tab.name}}">
+    	{{each tabs as tab tabIndex}}
+        	<div class="tab-pane {{if tabIndex==0}} active {{/if}}" data-tab="{{tab.name}}">
         		<ul class="emojis">
-                	{{each smilies[tab.name] as smily index}}
-                		 <li data-emoji="{{smily.emoji}}" class="emoji">
-                		 	<img src="{{basePath}}/{{smily.image}}" alt="{{smily.title}}" title="{{smily.title}}">
-                		 </li>
+                	{{each smilies[tab.name] as smily smilyIndex}}
+                        {{if smily.emoji}}
+                         <li data-emoji="{{smily.emoji}}" class="emoji">
+                            <img src="{{basePath}}/{{smily.image}}" alt="{{smily.title}}" title="{{smily.title}}">
+                         </li>
+                        {{else}}
+                         <li>
+                         </li>
+                        {{/if}}
                 	{{/each}}
+                        <li class="cok-clearfix"></li>
         		</ul>
         	</div>
     	{{/each}}
     </div>
+
+
+
+
 </div>

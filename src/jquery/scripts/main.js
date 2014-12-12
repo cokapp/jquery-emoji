@@ -1,17 +1,29 @@
 (function(){
 
+    var util = {};
+    util.fillSmilies = function(options){
+        for(var i in options.smilies){
+            var smilies = options.smilies[i];
+            var mod = smilies.length % 10;
+            if(mod == 0){
+                continue;
+            }
+            var needPush = 10 - mod;
+            console.log('needPush = ' + needPush);
+            while(needPush!=0){
+                smilies.push({
+                    emoji: false
+                });
+                needPush = needPush - 1;
+            }
+        }
+    }
 
-	var showDialog = function(){
-		var dialog = document.getElementById('cok-smilies-wrapper');
-		if(dialog != undefined){
-			
-		}
-
-	}
 
 	var CokEmoji = function(options, J_target){
 		var cokEmoji = this;
 		cokEmoji.html = template('dialog', options);
+        util.fillSmilies(options);
 
 		J_target.append(cokEmoji.html);
 		cokEmoji.EL = J_target.find('.cok-emoji-wrapper');
@@ -84,6 +96,214 @@
                 emoji: ':confused:',
                 title: '反对',
                 image: 'emoji/confused.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
+            }, {
+                emoji: ':cool:',
+                title: '超酷',
+                image: 'emoji/cool.png'
             }, {
                 emoji: ':cool:',
                 title: '超酷',

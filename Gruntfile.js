@@ -83,7 +83,7 @@ module.exports = function(grunt) {
                 options: {
                     base: 'src/jquery/tpls',
                     combo: true
-                } 
+                }
             }
         },
 
@@ -91,6 +91,22 @@ module.exports = function(grunt) {
         // remove temp dir
         clean: {
             dist: ['dist']
+        },
+
+        //watch changes
+        watch: {
+            change: {
+                files: ['src/**'],
+                tasks: [
+                    'clean',
+                    'mkdir',
+                    'tmod',
+                    'concat',
+                    'cssmin',
+                    'uglify',
+                    'copy'
+                ]
+            },
         }
     });
 
@@ -102,10 +118,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-tmod');
 
     grunt.registerTask('default', [
-        'clean',        
+        'clean',
         'mkdir',
         'tmod',
         'concat',
