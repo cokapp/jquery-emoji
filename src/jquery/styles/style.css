@@ -1,87 +1,88 @@
-
 /*全局*/
-.cok-clearfix{
-	clear: both;
-	width: 0 !important;
-	height: 0 !important;
-	border: 0 !important;
-}
-.cok-emoji-wrapper{
-	position: absolute;
-	border: 1px solid #ccc;
-	padding: 10px;
-	top: 100px;
-	left: 100px;
-	z-index: 1000;
-}
-.cok-emoji-wrapper *{
-	margin: 0;
-	padding: 0;
-	text-decoration: none;
-	font-size: 12px;
-}
-.cok-emoji-wrapper li{
-	list-style: none;
-}
-.cok-emoji-wrapper.cok-hidden{
-	display: none;
-}
-.cok-emoji-wrapper.cok-show{
-	display: block;
-}
 
-
+.cok-clearfix:before, .cok-clearfix:after {
+    display: table;
+    content: " ";
+}
+.cok-clearfix:after {
+    clear: both;
+}
+.cok-emoji-wrapper {
+    position: absolute;
+    border: 1px solid #ccc;
+    padding: 10px;
+    top: 100px;
+    left: 100px;
+    z-index: 1000;
+}
+.cok-emoji-wrapper * {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: default;
+}
+.cok-emoji-wrapper li {
+    list-style: none;
+}
+.cok-emoji-wrapper.cok-hidden {
+    display: none;
+}
+.cok-emoji-wrapper.cok-show {
+    display: block;
+}
 /*title*/
-.cok-emoji-wrapper .tab-nav{
-	border-bottom: 1px solid #ddd;
+
+.cok-emoji-wrapper .tab-nav {
+    border-bottom: 1px solid #ddd;
 }
-.cok-emoji-wrapper .tab-item{
-	float: left;
+.cok-emoji-wrapper .tab-item {
+    position: static;
+    float: left;
 }
-.cok-emoji-wrapper .tab-item.active>a{
-	border: 1px solid #ddd;
-	border-bottom-color: transparent;
-	background: #fff;
-	margin-top: 1px;
-	margin-bottom: -1px;
+.cok-emoji-wrapper .tab-item.active>a {
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    background: #fff;
+    margin-top: 1px;
+    margin-bottom: -1px;
+    cursor: default;
+    color: #555;
 }
-.cok-emoji-wrapper .tab-item>a{
-	display: block;
-	padding: 8px 12px;
-	color: #08c;
-	outline: 0;
-	cursor: pointer;
+.cok-emoji-wrapper .tab-item>a {
+    display: block;
+    padding: 8px 12px;
+    color: #08c;
+    outline: 0;
+    cursor: pointer;
 }
 /*content*/
-.cok-emoji-wrapper .tab-pane{
-	display: none;
-	width: 400px;
-	margin: 15px 0 5px 0;
-	border-bottom: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+
+.cok-emoji-wrapper .tab-pane {
+    display: none;
+    margin: 15px 0 5px 0;
 }
-.cok-emoji-wrapper .tab-pane.active{
-	display: block;
+.cok-emoji-wrapper .tab-pane.active {
+    display: block;
 }
-.cok-emoji-wrapper .emojis li{
-	float: left;
-	display: block;
-	border-top: 1px solid #ccc;
-	border-left: 1px solid #ccc;
+.cok-emoji-wrapper .emojis{
+	border-collapse: collapse;
+}
+.cok-emoji-wrapper .emojis td {
+	background: #fff;
+	border: solid 1px #ccc;
 	width: 39px;
 	height: 39px;
-	outline: 0;
 	text-align: center;
-	vertical-align: middle;
 }
-.cok-emoji-wrapper .emoji{
+.cok-emoji-wrapper .emoji {
+    cursor: pointer;
+}
+.cok-emoji-wrapper .emoji:hover {
+    background: #ddd;
+}
+.cok-emoji-wrapper .emoji>img {
+	max-width: 36px;
+	max-height: 36px;
 	cursor: pointer;
 }
-.cok-emoji-wrapper .emoji:hover{
-	background: #ddd;
-}
-.cok-emoji-wrapper .emoji>img{
-
-}
-
-
