@@ -231,6 +231,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-tmod');
 
+    require('./grunt/build-config.js')(grunt);
+
     grunt.registerTask('default', [
         'clean',
         'mkdir',
@@ -242,6 +244,6 @@ module.exports = function(grunt) {
         'copy'
     ]);
 
-    grunt.registerTask('build', buildConfig);
+    return grunt;
 
 };

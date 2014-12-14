@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<textarea id="content"></textarea>
+	<div id="content"></div>
 
 	<a href="javascript:;">颜文字</a>
 
@@ -19,7 +19,8 @@
 		$(document).ready(function(){
 			$('a').cokEmoji({
 				basePath: '../images/smilies/',
-				appendTo: '#content'
+				appendTo: '#content',
+				autoParse: 'image'
 			});
 		});
 	</script>

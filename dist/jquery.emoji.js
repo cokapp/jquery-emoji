@@ -3,9 +3,9 @@
  * Copyright 2014 cokapp (http://cokapp.com)
  * Licensed under MIT (http://opensource.org/licenses/MIT)
  */
-!function(){function a(a,b){return(/string|function/.test(typeof b)?h:g)(a,b)}function b(a,c){return"string"!=typeof a&&(c=typeof a,"number"===c?a+="":a="function"===c?b(a.call(a)):""),a}function c(a){return l[a]}function d(a){return b(a).replace(/&(?![\w#]+;)|[<>"']/g,c)}function e(a,b){if(m(a))for(var c=0,d=a.length;d>c;c++)b.call(a,a[c],c,a);else for(c in a)b.call(a,a[c],c)}function f(a,b){var c=/(\/)[^/]+\1\.\.\1/,d=("./"+a).replace(/[^/]+$/,""),e=d+b;for(e=e.replace(/\/\.\//g,"/");e.match(c);)e=e.replace(c,"/");return e}function g(b,c){var d=a.get(b)||i({filename:b,name:"Render Error",message:"Template not found"});return c?d(c):d}function h(a,b){if("string"==typeof b){var c=b;b=function(){return new k(c)}}var d=j[a]=function(c){try{return new b(c,a)+""}catch(d){return i(d)()}};return d.prototype=b.prototype=n,d.toString=function(){return b+""},d}function i(a){var b="{Template Error}",c=a.stack||"";if(c)c=c.split("\n").slice(0,2).join("\n");else for(var d in a)c+="<"+d+">\n"+a[d]+"\n\n";return function(){return"object"==typeof console&&console.error(b+"\n\n"+c),b}}var j=a.cache={},k=this.String,l={"<":"&#60;",">":"&#62;",'"':"&#34;","'":"&#39;","&":"&#38;"},m=Array.isArray||function(a){return"[object Array]"==={}.toString.call(a)},n=a.utils={$helpers:{},$include:function(a,b,c){return a=f(c,a),g(a,b)},$string:b,$escape:d,$each:e},o=a.helpers=n.$helpers;a.get=function(a){return j[a.replace(/^\.\//,"")]},a.helper=function(a,b){o[a]=b},"function"==typeof define?define(function(){return a}):"undefined"!=typeof exports?module.exports=a:this.template=a,/*v:33*/
-a("dialog",function(a){"use strict";var b=this,c=(b.$helpers,b.$each),d=a.tabs,e=(a.tab,a.tabIndex,b.$escape),f=a.smilies,g=(a.smily,a.smilyIndex,a.basePath),h="";return h+=' <div class="cok-emoji-wrapper cok-hidden"> <ul class="tab-nav cok-clearfix"> ',c(d,function(a,b){h+=' <li class="tab-item ',0==b&&(h+=" active "),h+='" data-tab="',h+=e(a.name),h+='"> <a href="javascript:;" hidefocus="true">',h+=e(a.title),h+="</a> </li> "}),h+=' </ul> <div class="tab-content"> ',c(d,function(a,b){h+=' <div class="tab-pane ',0==b&&(h+=" active "),h+='" data-tab="',h+=e(a.name),h+='"> <table class="emojis"> <tbody> <tr> ',c(f[a.name],function(b,c){h+=" ",0!=c&&c!=f[a.name].length&&0===c%10&&(h+=" </tr><tr> "),h+=" ",b.name?(h+=' <td data-name="',h+=e(b.name),h+='" class="emoji"> <img src="',h+=e(g),h+="/",h+=e(b.image),h+='" alt="',h+=e(b.title),h+='" title="',h+=e(b.title),h+='"> </td> '):h+=" <td></td> ",h+=" "}),h+=" </tr> </tbody> </table> </div> "}),h+=" </div> </div> ",new k(h)}),/*v:1*/
-a("image-emoji",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.image,e=a.title,f="";return f+='<img src="',f+=c(d),f+='" title="',f+=c(e),f+='" />',new k(f)}),/*v:1*/
+!function(){function a(a,b){return(/string|function/.test(typeof b)?h:g)(a,b)}function b(a,c){return"string"!=typeof a&&(c=typeof a,"number"===c?a+="":a="function"===c?b(a.call(a)):""),a}function c(a){return l[a]}function d(a){return b(a).replace(/&(?![\w#]+;)|[<>"']/g,c)}function e(a,b){if(m(a))for(var c=0,d=a.length;d>c;c++)b.call(a,a[c],c,a);else for(c in a)b.call(a,a[c],c)}function f(a,b){var c=/(\/)[^/]+\1\.\.\1/,d=("./"+a).replace(/[^/]+$/,""),e=d+b;for(e=e.replace(/\/\.\//g,"/");e.match(c);)e=e.replace(c,"/");return e}function g(b,c){var d=a.get(b)||i({filename:b,name:"Render Error",message:"Template not found"});return c?d(c):d}function h(a,b){if("string"==typeof b){var c=b;b=function(){return new k(c)}}var d=j[a]=function(c){try{return new b(c,a)+""}catch(d){return i(d)()}};return d.prototype=b.prototype=n,d.toString=function(){return b+""},d}function i(a){var b="{Template Error}",c=a.stack||"";if(c)c=c.split("\n").slice(0,2).join("\n");else for(var d in a)c+="<"+d+">\n"+a[d]+"\n\n";return function(){return"object"==typeof console&&console.error(b+"\n\n"+c),b}}var j=a.cache={},k=this.String,l={"<":"&#60;",">":"&#62;",'"':"&#34;","'":"&#39;","&":"&#38;"},m=Array.isArray||function(a){return"[object Array]"==={}.toString.call(a)},n=a.utils={$helpers:{},$include:function(a,b,c){return a=f(c,a),g(a,b)},$string:b,$escape:d,$each:e},o=a.helpers=n.$helpers;a.get=function(a){return j[a.replace(/^\.\//,"")]},a.helper=function(a,b){o[a]=b},"function"==typeof define?define(function(){return a}):"undefined"!=typeof exports?module.exports=a:this.template=a,/*v:36*/
+a("dialog",function(a){"use strict";var b=this,c=(b.$helpers,b.$each),d=a.tabs,e=(a.tab,a.tabIndex,b.$escape),f=a.smilies,g=(a.smily,a.smilyIndex,a.basePath),h="";return h+=' <div class="cok-emoji-wrapper cok-hidden"> <ul class="tab-nav cok-clearfix"> ',c(d,function(a,b){h+=' <li class="tab-item ',0==b&&(h+=" active "),h+='" data-tab="',h+=e(a.name),h+='"> <a href="javascript:;" hidefocus="true">',h+=e(a.title),h+="</a> </li> "}),h+=' </ul> <div class="tab-content"> ',c(d,function(a,b){h+=' <div class="tab-pane ',0==b&&(h+=" active "),h+='" data-tab="',h+=e(a.name),h+='"> <table class="emojis"> <tbody> <tr> ',c(f[a.name],function(b,c){h+=" ",0!=c&&c!=f[a.name].length&&0===c%10&&(h+=" </tr><tr> "),h+=" ",b.name?(h+=' <td data-name="',h+=e(b.name),h+='" class="emoji"> <img data-src="',h+=e(g),h+=e(b.image),h+='" alt="',h+=e(b.title),h+='" title="',h+=e(b.title),h+='"> </td> '):h+=" <td></td> ",h+=" "}),h+=" </tr> </tbody> </table> </div> "}),h+=" </div> </div> ",new k(h)}),/*v:2*/
+a("image-emoji",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.basePath,e=a.image,f=a.title,g="";return g+='<img src="',g+=c(d),g+=c(e),g+='" title="',g+=c(f),g+='" />',new k(g)}),/*v:1*/
 a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.text,e="";return e+=c(d),new k(e)})}();
 (function(){
 
@@ -40,6 +40,34 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
         //私有变量
         var emojiRegex = new RegExp(':(' + cokEmoji.options.emojies.join('|') + '):', 'g'); 
 
+        //选中标签
+        var selectTab = function(J_tab){
+
+            var tabs = cokEmoji.EL.find('.tab-item');
+            var tab = J_tab;
+            tabs.removeClass('active');
+            tab.addClass('active');
+
+            var panels = cokEmoji.EL.find('.tab-pane');
+            panels.each(function(){
+                var panel = $(this);
+                if(panel.data('tab')===tab.data('tab')){
+                    panel.addClass('active');
+                    //第一次展现时加载背景图片
+                    if(!panel.data('loaded')){
+                        panel.find('.emoji img').each(function(){
+                            var J_img = $(this);
+                            J_img.attr('src', J_img.data('src'));
+                        });
+                        panel.data('loaded', true);
+                    }
+                }else{
+                    panel.removeClass('active');
+                }
+            });            
+        }
+
+
         //DOM操作
 		J_target.append(cokEmoji.html);
 		cokEmoji.EL = J_target.find('.cok-emoji-wrapper');
@@ -60,20 +88,8 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
         });
         //页签改变
         cokEmoji.EL.find('.tab-item').on('click', function(){
-            var tabs = cokEmoji.EL.find('.tab-item');
-            var tab = $(this);
-            tabs.removeClass('active');
-            tab.addClass('active');
-
-            var panels = cokEmoji.EL.find('.tab-pane');
-            panels.each(function(){
-                var panel = $(this);
-                if(panel.data('tab')===tab.data('tab')){
-                    panel.addClass('active');
-                }else{
-                    panel.removeClass('active');
-                }
-            });
+            var J_tab = $(this);
+            selectTab(J_tab);
         });
 
 		//注入
@@ -93,8 +109,10 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
         //将包含Emoji的源字符串替换为image或text
         cokEmoji.translate = function(input, isText){
             
-            var output = input.replace(emojiRegex, function(name){
+            var output = input.replace(emojiRegex, function(text, name){
                 var emoji = util.findEmoji(name, cokEmoji.options);
+                emoji.basePath = cokEmoji.options.basePath;
+
                 if(isText){
                     return template('text-emoji', emoji);
                 }else{
@@ -103,10 +121,14 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
             });
 
             return output;
-        }    
+        }
+
+
+
+        //初始化
+        var firstTab = cokEmoji.EL.find('.tab-item:first');
+        selectTab(firstTab);
 	}
-
-
 
 
     $.fn.cokEmoji = function(options) {
@@ -130,11 +152,29 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
 
     $.cokEmoji.options = {
 		basePath: 'images/smilies/',
-    	autoParse: false,
+        //image、text、emoji or none
+    	autoParse: 'emoji',
 		appendTo: 'textArea',
         onSelected: function(emjtext, emj){
             var cokEmoji = this;
-            $(cokEmoji.options.appendTo).append(emjtext);
+            if(cokEmoji.options.autoParse === 'none'){
+                return;
+            }
+            var J_appendTo = $(cokEmoji.options.appendTo);
+            if(J_appendTo.length === 0){
+                return;
+            }
+
+            var content = null;
+            if(cokEmoji.options.autoParse === 'image'){
+                content = cokEmoji.translate(emjtext);
+            }else if (cokEmoji.options.autoParse === 'text'){
+                content = cokEmoji.translate(emjtext, true);
+            }else{
+                content = emjtext;
+            }
+
+            J_appendTo.append(content);
         }
     };
 

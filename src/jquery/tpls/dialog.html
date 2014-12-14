@@ -60,7 +60,7 @@ var config = {
                             {{/if}}
                             {{if smily.name}}
                              <td data-name="{{smily.name}}" class="emoji">
-                                <img src="{{basePath}}/{{smily.image}}" alt="{{smily.title}}" title="{{smily.title}}">
+                                <img data-src="{{basePath}}{{smily.image}}" alt="{{smily.title}}" title="{{smily.title}}">
                              </td>
                             {{else}}
                              <td></td>

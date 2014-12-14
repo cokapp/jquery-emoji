@@ -31,6 +31,34 @@
         //私有变量
         var emojiRegex = new RegExp(':(' + cokEmoji.options.emojies.join('|') + '):', 'g'); 
 
+        //选中标签
+        var selectTab = function(J_tab){
+
+            var tabs = cokEmoji.EL.find('.tab-item');
+            var tab = J_tab;
+            tabs.removeClass('active');
+            tab.addClass('active');
+
+            var panels = cokEmoji.EL.find('.tab-pane');
+            panels.each(function(){
+                var panel = $(this);
+                if(panel.data('tab')===tab.data('tab')){
+                    panel.addClass('active');
+                    //第一次展现时加载背景图片
+                    if(!panel.data('loaded')){
+                        panel.find('.emoji img').each(function(){
+                            var J_img = $(this);
+                            J_img.attr('src', J_img.data('src'));
+                        });
+                        panel.data('loaded', true);
+                    }
+                }else{
+                    panel.removeClass('active');
+                }
+            });            
+        }
+
+
         //DOM操作
 		J_target.append(cokEmoji.html);
 		cokEmoji.EL = J_target.find('.cok-emoji-wrapper');
@@ -51,20 +79,8 @@
         });
         //页签改变
         cokEmoji.EL.find('.tab-item').on('click', function(){
-            var tabs = cokEmoji.EL.find('.tab-item');
-            var tab = $(this);
-            tabs.removeClass('active');
-            tab.addClass('active');
-
-            var panels = cokEmoji.EL.find('.tab-pane');
-            panels.each(function(){
-                var panel = $(this);
-                if(panel.data('tab')===tab.data('tab')){
-                    panel.addClass('active');
-                }else{
-                    panel.removeClass('active');
-                }
-            });
+            var J_tab = $(this);
+            selectTab(J_tab);
         });
 
 		//注入
@@ -84,8 +100,10 @@
         //将包含Emoji的源字符串替换为image或text
         cokEmoji.translate = function(input, isText){
             
-            var output = input.replace(emojiRegex, function(name){
+            var output = input.replace(emojiRegex, function(text, name){
                 var emoji = util.findEmoji(name, cokEmoji.options);
+                emoji.basePath = cokEmoji.options.basePath;
+
                 if(isText){
                     return template('text-emoji', emoji);
                 }else{
@@ -94,10 +112,14 @@
             });
 
             return output;
-        }    
+        }
+
+
+
+        //初始化
+        var firstTab = cokEmoji.EL.find('.tab-item:first');
+        selectTab(firstTab);
 	}
-
-
 
 
     $.fn.cokEmoji = function(options) {
@@ -121,11 +143,29 @@
 
     $.cokEmoji.options = {
 		basePath: 'images/smilies/',
-    	autoParse: false,
+        //image、text、emoji or none
+    	autoParse: 'emoji',
 		appendTo: 'textArea',
         onSelected: function(emjtext, emj){
             var cokEmoji = this;
-            $(cokEmoji.options.appendTo).append(emjtext);
+            if(cokEmoji.options.autoParse === 'none'){
+                return;
+            }
+            var J_appendTo = $(cokEmoji.options.appendTo);
+            if(J_appendTo.length === 0){
+                return;
+            }
+
+            var content = null;
+            if(cokEmoji.options.autoParse === 'image'){
+                content = cokEmoji.translate(emjtext);
+            }else if (cokEmoji.options.autoParse === 'text'){
+                content = cokEmoji.translate(emjtext, true);
+            }else{
+                content = emjtext;
+            }
+
+            J_appendTo.append(content);
         }
     };
 

@@ -3,6 +3,16 @@
  * Copyright 2014 cokapp (http://cokapp.com)
  * Licensed under MIT (http://opensource.org/licenses/MIT)
  */
+.biggrin{
+	width: 40px;
+	height: 40px;
+	background: url('images/smilies/emoji/biggrin.png');
+}
+.confused{
+	width: 40px;
+	height: 40px;
+	background: url('images/smilies/emoji/confused.png');
+}
 .cok-clearfix:before, .cok-clearfix:after {
     display: table;
     content: " ";
