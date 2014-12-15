@@ -62,8 +62,6 @@
             var targetOffset = J_target.offset();
             var top = J_target.offset().top + J_target.height() + 10;
             var left = J_target.offset().left + J_target.width() / 2 - 20;
-            console.log('top='+top);
-            console.log('left='+left);
             cokEmoji.EL.css({ top: top + 'px', left: left + 'px'});
         }
         var autoHide = function(){
@@ -96,8 +94,15 @@
             var emj = util.findEmoji(emjName, cokEmoji.options);
             var emjText = ':' + emjName + ':';
 
-            if(cokEmoji.options.onSelected){
-                cokEmoji.options.onSelected.call(cokEmoji, emjText, emj);
+            if(cokEmoji.options.onselected){
+                if(cokEmoji.options.autoparse === 'image'){
+                    content = cokEmoji.translate(emjText);
+                }else if (cokEmoji.options.autoparse === 'text'){
+                    content = cokEmoji.translate(emjText, true);
+                }else{
+                    content = emjText;
+                }
+                cokEmoji.options.onselected.call(cokEmoji, content, emj);
             }
 
             cokEmoji.hide();
@@ -131,7 +136,7 @@
             
             var output = input.replace(emojiRegex, function(text, name){
                 var emoji = util.findEmoji(name, cokEmoji.options);
-                emoji.basePath = cokEmoji.options.basePath;
+                emoji.basepath = cokEmoji.options.basepath;
 
                 if(isText){
                     return template('text-emoji', emoji);
@@ -166,36 +171,38 @@
         		cokEmoji.show();
         	});
 
+            $.cokEmoji.cache(cokEmoji.options.name, cokEmoji);
             return cokEmoji;
         });
     };
+
+
     $.cokEmoji = {};
 
+    $.cokEmoji.cacheStore = {};
+    $.cokEmoji.cache = function(key, val){
+        if(val != undefined && val != null){
+            $.cokEmoji.cacheStore[key] = val;
+        }else{
+            return $.cokEmoji.cacheStore[key];
+        }
+    }
+
     $.cokEmoji.options = {
-		basePath: 'images/smilies/',
+		basepath: 'images/smilies/',
         //image、text、emoji or none
-    	autoParse: 'emoji',
-		appendTo: 'textArea',
-        onSelected: function(emjtext, emj){
+    	autoparse: 'emoji',
+		appendto: 'textArea',
+        onselected: function(emjtext, emj){
             var cokEmoji = this;
-            if(cokEmoji.options.autoParse === 'none'){
+            if(cokEmoji.options.autoparse === 'none'){
                 return;
             }
-            var J_appendTo = $(cokEmoji.options.appendTo);
-            if(J_appendTo.length === 0){
+            var J_appendto = $(cokEmoji.options.appendto);
+            if(J_appendto.length === 0){
                 return;
             }
-
-            var content = null;
-            if(cokEmoji.options.autoParse === 'image'){
-                content = cokEmoji.translate(emjtext);
-            }else if (cokEmoji.options.autoParse === 'text'){
-                content = cokEmoji.translate(emjtext, true);
-            }else{
-                content = emjtext;
-            }
-
-            J_appendTo.append(content);
+            J_appendto.append(emjtext);
         }
     };
 

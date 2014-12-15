@@ -1,4 +1,4 @@
-var cokEmoji = angular.module('cok-emoji', ['ngSanitize']);
+var cokEmoji = angular.module('cokjs.emoji', []);
 
 cokEmoji.config(['$provide',
     function($provide) {

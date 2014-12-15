@@ -3,91 +3,6 @@ module.exports = function(grunt) {
     var smiliesPath = 'src/jquery/images/smilies/';
     var configFileName = 'config.json';
 
-    function buildConfig(isReplace){
-
-        function createDefaultConfig(folder, isReplace){
-            var config = {};
-            config.name = folder.replace(smiliesPath, '').replace('/', '');
-            config.title = config.name;
-            config.smilies = [];
-
-            grunt.file.recurse(folder, function(abspath, rootdir, subdir, filename){
-                if(filename === configFileName){
-                    return;
-                }
-                var smily = {};
-                var name = filename.substr(0, filename.indexOf('.'));
-                smily.name = name;
-                smily.title = name;
-                smily.text = name;
-                smily.image = filename;
-                config.smilies.push(smily);
-            });
-            var configFile = folder + configFileName;
-            console.log('write to ' + configFile);
-            grunt.file.delete(configFile);
-            grunt.file.write(configFile, JSON.stringify(config));
-        }
-
-
-        //1.读取配置
-        var smiliesConfigArray = [];
-
-        //1.1.获取文件夹列表
-        var smiliesFolder = grunt.file.expand(smiliesPath + '*/');
-        //1.2.生成或读取一级配置
-        for(var i in smiliesFolder){
-            var folder = smiliesFolder[i];
-            var configFile = folder + configFileName;
-            if(isReplace || !grunt.file.exists(configFile)){
-                createDefaultConfig(folder, isReplace);
-            }
-            smiliesConfigArray.push(grunt.file.readJSON(configFile));
-        }
-
-        //2.生成最终配置
-        var smiliesConfig = {
-            tabs: [],
-            smilies: {},
-            emojiMap: {},
-            emojies: []
-        };
-
-        for(var i in smiliesConfigArray){
-            var config = smiliesConfigArray[i];
-
-            smiliesConfig.tabs.push({
-                name: config.name,
-                title: config.title
-            });
-            smiliesConfig.smilies[config.name] = [];
-            for(var j in config.smilies){
-                var smily = config.smilies[j];
-                var newSmily = {};
-                newSmily.name = smily.name;
-                newSmily.title = newSmily.name;
-                newSmily.text = newSmily.name;
-                newSmily.image = config.name + '/' + smily.image;
-
-                var oldSmily = smiliesConfig.emojiMap[newSmily.name];
-                if(oldSmily){
-                    console.warn('当前Emoji(%s)与%s重复！', newSmily.image, oldSmily.image);
-                    continue;
-                }
-                smiliesConfig.emojiMap[newSmily.name] = newSmily;
-                smiliesConfig.emojies.push(newSmily.name);
-                smiliesConfig.smilies[config.name].push(newSmily);
-            }
-
-
-        }
-        //3.写入最终配置
-        var smiliesConfigFile = smiliesPath + configFileName;
-        console.log('write to ' + smiliesConfigFile);
-        grunt.file.delete(smiliesConfigFile);
-        grunt.file.write(smiliesConfigFile, JSON.stringify(smiliesConfig));
-    }
-
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         config: grunt.file.readJSON(smiliesPath + configFileName),
@@ -110,7 +25,7 @@ module.exports = function(grunt) {
                     block: true
                 }
             },
-            src: {
+            jquery: {
                 files: {
                     'dist/jquery.emoji.css': [
                         'src/jquery/styles/**.css'
@@ -209,8 +124,9 @@ module.exports = function(grunt) {
                     'clean',
                     'mkdir',
                     'tmod',
-                    'concat',
+                    'concat:jquery',
                     'replace',
+                    'concat:angular',
                     'cssmin',
                     'uglify',
                     'copy'
@@ -232,13 +148,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-tmod');
 
     require('./grunt/build-config.js')(grunt);
+    require('./grunt/build-angular.js')(grunt);
 
     grunt.registerTask('default', [
         'clean',
         'mkdir',
         'tmod',
-        'concat',
+        'concat:jquery',
         'replace',
+        'concat:angular',
         'cssmin',
         'uglify',
         'copy'

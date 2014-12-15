@@ -221,3 +221,59 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
 
 
 }(jQuery));
+var cokEmoji = angular.module('cokjs.emoji', []);
+
+cokEmoji.config(['$provide',
+    function($provide) {
+    }
+]);
+
+angular.module('cokjs.emoji')
+    .directive('emojiParser', function() {
+        var cokEmoji = null;
+
+        return {
+            restrict: 'A',
+            scope: {
+                emoji: '=emojiBind'
+            },
+            link: function($scope, el, attrs) {
+                $scope.$watch('emoji', function(newValue, oldValue) {
+                    if (!cokEmoji) {
+                        cokEmoji = $.cokEmoji.cache(attrs.emojiParser);
+                    }
+
+                    var html;
+                    if (attrs.emojiParseto === 'image') {
+                        html = cokEmoji.translate($scope.emoji, false);
+                    } else {
+                        html = cokEmoji.translate($scope.emoji, true);
+                    }
+                    el.html(html);
+
+                }, false);
+            }
+        };
+    })
+
+angular.module('cokjs.emoji')
+    .directive('emojiSwitcher', function() {
+        return {
+            restrict: 'A',
+            scope: {
+                emoji: '=emojiBind'
+            },          
+            link: function($scope, el, attrs) {
+                var config = {
+                    name: attrs.emojiSwitcher,
+                    basepath: attrs.emojiBasepath,
+                    onselected: function(emjtext, emj){
+                        $scope.emoji += emjtext;
+                        $scope.$apply();
+                    }
+                };
+                el.cokEmoji(config);
+            }
+        };
+    })
+
