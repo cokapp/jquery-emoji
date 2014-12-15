@@ -57,11 +57,20 @@
                 }
             });            
         }
-
+        //定位，目前固定于触发元素的下方
+        var rePosition = function(){
+            var targetOffset = J_target.offset();
+            var top = J_target.offset().top + J_target.height() + 10;
+            var left = J_target.offset().left + J_target.width() / 2 - 20;
+            console.log('top='+top);
+            console.log('left='+left);
+            cokEmoji.EL.css({ top: top + 'px', left: left + 'px'});
+        }
 
         //DOM操作
 		J_target.append(cokEmoji.html);
 		cokEmoji.EL = J_target.find('.cok-emoji-wrapper');
+
         //表情选择
         cokEmoji.EL.find('.emoji').on('click', function(){
             var emjEL = $(this);
@@ -87,9 +96,9 @@
 		J_target.data('cokEmoji', cokEmoji);
 
 
-
         //API
 		cokEmoji.show = function(){
+            rePosition();
 			cokEmoji.EL.removeClass('cok-hidden');
 			cokEmoji.EL.addClass('cok-show');
 		}

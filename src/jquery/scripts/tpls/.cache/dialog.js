@@ -1,6 +1,6 @@
-/*TMODJS:{"version":36,"md5":"bf9529fe9aff2dc0cb9947ea471756e2"}*/
+/*TMODJS:{"version":39,"md5":"d42667a2ec3c4a916fec5ed66391ec50"}*/
 template('dialog',function($data,$filename) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,tabs=$data.tabs,tab=$data.tab,tabIndex=$data.tabIndex,$escape=$utils.$escape,smilies=$data.smilies,smily=$data.smily,smilyIndex=$data.smilyIndex,basePath=$data.basePath,$out='';$out+=' <div class="cok-emoji-wrapper cok-hidden"> <ul class="tab-nav cok-clearfix"> ';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$each=$utils.$each,tabs=$data.tabs,tab=$data.tab,tabIndex=$data.tabIndex,$escape=$utils.$escape,smilies=$data.smilies,smily=$data.smily,smilyIndex=$data.smilyIndex,basePath=$data.basePath,$out='';$out+=' <div class="cok-emoji-wrapper cok-hidden"> <div class="caret-up"> <div></div> </div> <ul class="tab-nav cok-clearfix"> ';
 $each(tabs,function(tab,tabIndex){
 $out+=' <li class="tab-item ';
 if(tabIndex==0){

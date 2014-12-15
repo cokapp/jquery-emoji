@@ -24,8 +24,6 @@
     position: absolute;
     border: 1px solid #ccc;
     padding: 10px;
-    top: 100px;
-    left: 100px;
     z-index: 1000;
 }
 .cok-emoji-wrapper * {
@@ -45,7 +43,22 @@
     display: block;
 }
 /*title*/
-
+.cok-emoji-wrapper .caret-up, .cok-emoji-wrapper .caret-up div{
+    border-width: 10px;
+    border-style: dashed dashed solid dashed;
+    border-color: transparent transparent #ccc transparent;
+    position: absolute;
+    left: 10px;
+    top: -20px;
+    height: 0;
+    width: 0;
+    line-height: 0;
+}
+.cok-emoji-wrapper .caret-up div{
+    top: -9px;
+    left: -10px;
+    border-bottom-color: #fff;
+}
 .cok-emoji-wrapper .tab-nav {
     border-bottom: 1px solid #ddd;
 }
