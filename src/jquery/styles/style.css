@@ -11,15 +11,18 @@
     position: absolute;
     border: 1px solid #ccc;
     padding: 10px;
-    z-index: 1000;
+    z-index: 9999;
     cursor: default;
+    background: #fff;
 }
 .cok-emoji-wrapper * {
     margin: 0;
     padding: 0;
-    text-decoration: none;
+    text-decoration: none !important;
     font-size: 12px;
     cursor: default;
+    z-index: 9999;
+    background: #fff;
 }
 .cok-emoji-wrapper li {
     list-style: none;
@@ -31,7 +34,8 @@
     display: block;
 }
 /*title*/
-.cok-emoji-wrapper .caret-up, .cok-emoji-wrapper .caret-up div{
+/*向上箭头*/
+.cok-emoji-wrapper .caret-down, .cok-emoji-wrapper .caret-down div{
     border-width: 10px;
     border-style: dashed dashed solid dashed;
     border-color: transparent transparent #ccc transparent;
@@ -41,12 +45,71 @@
     height: 0;
     width: 0;
     line-height: 0;
+    background: transparent;
 }
-.cok-emoji-wrapper .caret-up div{
+.cok-emoji-wrapper .caret-down div{
     top: -9px;
     left: -10px;
     border-bottom-color: #fff;
 }
+/*向下箭头*/
+.cok-emoji-wrapper .caret-up, .cok-emoji-wrapper .caret-up div{
+    border-width: 10px;
+    border-style: solid dashed dashed dashed;
+    border-color: #ccc transparent transparent transparent;
+    position: absolute;
+    left: 10px;
+    bottom: -20px;
+    height: 0;
+    width: 0;
+    line-height: 0;
+    background: transparent;
+}
+.cok-emoji-wrapper .caret-up div{
+    bottom: -9px;
+    left: -10px;
+    border-top-color: #fff;
+}
+/*向左箭头*/
+.cok-emoji-wrapper .caret-right, .cok-emoji-wrapper .caret-right div{
+    border-width: 10px;
+    border-style: dashed solid dashed dashed;
+    border-color: transparent #ccc transparent transparent;
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    height: 0;
+    width: 0;
+    line-height: 0;
+    background: transparent;
+}
+.cok-emoji-wrapper .caret-right div{
+    left: -9px;
+    top: -10px;
+    border-right-color: #fff;
+}
+/*向右箭头*/
+.cok-emoji-wrapper .caret-left, .cok-emoji-wrapper .caret-left div{
+    border-width: 10px;
+    border-style: dashed dashed dashed solid;
+    border-color: transparent transparent transparent #ccc;
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    height: 0;
+    width: 0;
+    line-height: 0;
+    background: transparent;
+}
+.cok-emoji-wrapper .caret-left div{
+    left: -9px;
+    top: -10px;
+    border-left-color: #fff;
+}
+
+
+
+
 .cok-emoji-wrapper .tab-nav {
     border-bottom: 1px solid #ddd;
 }
@@ -79,14 +142,14 @@
     display: block;
 }
 .cok-emoji-wrapper .emojis{
-	border-collapse: collapse;
+    border-collapse: collapse;
 }
 .cok-emoji-wrapper .emojis td {
-	background: #fff;
-	border: solid 1px #ccc;
-	width: 39px;
-	height: 39px;
-	text-align: center;
+    background: #fff;
+    border: solid 1px #ccc;
+    width: 39px;
+    height: 39px;
+    text-align: center;
 }
 .cok-emoji-wrapper .emoji {
     cursor: pointer;
@@ -95,7 +158,7 @@
     background: #ddd;
 }
 .cok-emoji-wrapper .emoji>img {
-	max-width: 36px;
-	max-height: 36px;
-	cursor: pointer;
+    max-width: 36px;
+    max-height: 36px;
+    cursor: pointer;
 }

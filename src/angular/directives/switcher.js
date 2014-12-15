@@ -9,6 +9,7 @@ angular.module('cokjs.emoji')
                 var config = {
                     name: attrs.emojiSwitcher,
                     basepath: attrs.emojiBasepath,
+                    position: attrs.emojiPosition,
                     onselected: function(emjtext, emj){
                         $scope.emoji += emjtext;
                         $scope.$apply();

@@ -60,8 +60,49 @@
         //定位，目前固定于触发元素的下方
         var rePosition = function(){
             var targetOffset = J_target.offset();
-            var top = J_target.offset().top + J_target.height() + 10;
-            var left = J_target.offset().left + J_target.width() / 2 - 20;
+            var J_win = $(window);
+
+            var top = J_target.offset().top
+            , left = J_target.offset().left;
+
+            //在target右方出现
+            if(cokEmoji.options.position === 'right'){
+                top += J_target.height() / 2 - 20;
+                left += J_target.width() + 10;
+
+                var caretOffset = J_target.offset().top 
+                - cokEmoji.EL.offset().top;
+
+                cokEmoji.EL.find('.caret').css({top: caretOffset + 'px'});
+            }
+            //在target下方出现
+            else{
+                top += J_target.height() + 10;
+                left += J_target.width() / 2 - 20;
+            }
+
+            if(left < 0){
+                left = 0;
+            }
+            if(top < 0){
+                top = 0;
+            }
+
+
+            console.log('top='+top);
+            console.log('height='+cokEmoji.EL.height());
+            console.log('win='+J_win.height());
+
+
+
+            if(left + cokEmoji.EL.width() > J_win.width()){
+                //TODO
+            }
+            if(top + cokEmoji.EL.height() > J_win.height()){
+                cokEmoji.EL.css({ bottom: '0px', left: left + 'px'});
+                return;
+            }
+
             cokEmoji.EL.css({ top: top + 'px', left: left + 'px'});
         }
         var autoHide = function(){
@@ -193,6 +234,7 @@
         //image、text、emoji or none
     	autoparse: 'emoji',
 		appendto: 'textArea',
+        position: 'down',
         onselected: function(emjtext, emj){
             var cokEmoji = this;
             if(cokEmoji.options.autoparse === 'none'){
