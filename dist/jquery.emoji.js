@@ -75,6 +75,24 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
             console.log('left='+left);
             cokEmoji.EL.css({ top: top + 'px', left: left + 'px'});
         }
+        var autoHide = function(){
+            var childA = cokEmoji.EL.find('a')
+                ,childUL = cokEmoji.EL.find('ul')
+                ,childDiv = cokEmoji.EL.find('div');
+
+            $(document).on('click', function(e){
+                e = window.event || e; // 兼容IE7
+                obj = $(e.srcElement || e.target);
+                var notHide = obj.is(J_target) 
+                    || obj.is(cokEmoji.EL) 
+                    || obj.is(childA)
+                    || obj.is(childUL)
+                    || obj.is(childDiv);
+                if (!notHide){
+                    cokEmoji.hide();
+                }
+            });
+        }
 
         //DOM操作
 		J_target.append(cokEmoji.html);
@@ -101,6 +119,7 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
             selectTab(J_tab);
         });
 
+
 		//注入
 		J_target.data('cokEmoji', cokEmoji);
 
@@ -110,6 +129,7 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
             rePosition();
 			cokEmoji.EL.removeClass('cok-hidden');
 			cokEmoji.EL.addClass('cok-show');
+            cokEmoji.EL.focus();
 		}
 		cokEmoji.hide = function(){
 			cokEmoji.EL.removeClass('cok-show');
@@ -137,6 +157,7 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
         //初始化
         var firstTab = cokEmoji.EL.find('.tab-item:first');
         selectTab(firstTab);
+        autoHide();
 	}
 
 

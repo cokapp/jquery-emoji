@@ -12,6 +12,7 @@
     border: 1px solid #ccc;
     padding: 10px;
     z-index: 1000;
+    cursor: default;
 }
 .cok-emoji-wrapper * {
     margin: 0;
@@ -59,7 +60,6 @@
     background: #fff;
     margin-top: 1px;
     margin-bottom: -1px;
-    cursor: default;
     color: #555;
 }
 .cok-emoji-wrapper .tab-item>a {
