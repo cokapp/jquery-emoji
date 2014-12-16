@@ -7,7 +7,7 @@
 ##预览
 基本上，就是这个样子：
 
-![屏幕截图]({{ site.baseurl }}/static/screen.png)
+![屏幕截图](http://cokapp.github.io/jquery-emoji/static/screen.png)
 
 ##特性
 1. 开箱即用 [如何使用？](http://cokapp.github.io/jquery-emoji/tut/use)
