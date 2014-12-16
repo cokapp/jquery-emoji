@@ -1,10 +1,16 @@
 {
   "name": "jquery-emoji",
+  "filename": "jquery.emoji.js",
   "version": "1.1.0",
   "author": {
     "name": "cokapp",
     "homepage": "http://github.com/cokapp"
   },
+  "maintainers": {
+    "name": "cokapp",
+    "web": "http://github.com/cokapp",
+    "mail": "dev@cokapp.com"
+  },  
   "description": "a easy way to send smily",
   "main": "dist/jquery.emoji.js",
   "devDependencies": {
@@ -25,14 +31,15 @@
   "keywords": [
     "angularjs",
     "jquery",
-    "emoji"
+    "emoji",
+    "smily"
   ],
   "license": "MIT",
-  "homepage": "http://github.com/cokapp/jquery-emoji",
-  "repository": {
+  "homepage": "http://cokapp.github.io/jquery-emoji",
+  "repositories": [{
     "type": "git",
     "url": "git://github.com/cokapp/jquery-emoji.git"
-  },
+  }],
   "bugs": {
     "url": "https://github.com/cokapp/jquery-emoji/issues"
   },
