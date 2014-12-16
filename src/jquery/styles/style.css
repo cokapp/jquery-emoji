@@ -13,7 +13,7 @@
     padding: 10px;
     z-index: 9999;
     cursor: default;
-    background: #fff;
+    background: #fff !important;
 }
 .cok-emoji-wrapper * {
     margin: 0;

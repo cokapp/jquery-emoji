@@ -7,18 +7,18 @@
 a("dialog",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.position,e=b.$each,f=a.tabs,g=(a.tab,a.tabIndex,a.smilies),h=(a.smily,a.smilyIndex,a.basepath),i="";return i+=' <div class="cok-emoji-wrapper cok-hidden"> <div class="caret caret-',i+=c(d),i+='"> <div></div> </div> <ul class="tab-nav cok-clearfix"> ',e(f,function(a,b){i+=' <li class="tab-item ',0==b&&(i+=" active "),i+='" data-tab="',i+=c(a.name),i+='"> <a href="javascript:;" hidefocus="true">',i+=c(a.title),i+="</a> </li> "}),i+=' </ul> <div class="tab-content"> ',e(f,function(a,b){i+=' <div class="tab-pane ',0==b&&(i+=" active "),i+='" data-tab="',i+=c(a.name),i+='"> <table class="emojis"> <tbody> <tr> ',e(g[a.name],function(b,d){i+=" ",0!=d&&d!=g[a.name].length&&0===d%10&&(i+=" </tr><tr> "),i+=" ",b.name?(i+=' <td data-name="',i+=c(b.name),i+='" class="emoji"> <img data-src="',i+=c(h),i+=c(b.image),i+='" alt="',i+=c(b.title),i+='" title="',i+=c(b.title),i+='"> </td> '):i+=" <td></td> ",i+=" "}),i+=" </tr> </tbody> </table> </div> "}),i+=" </div> </div> ",new k(i)}),/*v:3*/
 a("image-emoji",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.basepath,e=a.image,f=a.title,g="";return g+='<img src="',g+=c(d),g+=c(e),g+='" title="',g+=c(f),g+='" />',new k(g)}),/*v:1*/
 a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.text,e="";return e+=c(d),new k(e)})}();
-(function(){
+(function() {
 
     var util = {};
-    util.fillSmilies = function(options){
-        for(var i in options.smilies){
+    util.fillSmilies = function(options) {
+        for (var i in options.smilies) {
             var smilies = options.smilies[i];
             var mod = smilies.length % 10;
-            if(mod == 0){
+            if (mod == 0) {
                 continue;
             }
             var needPush = 10 - mod;
-            while(needPush!=0){
+            while (needPush != 0) {
                 smilies.push({
                     name: false
                 });
@@ -27,129 +27,138 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
         }
         return options;
     };
-    util.findEmoji = function(name, options){
+    util.findEmoji = function(name, options) {
         return options.emojiMap[name];
     }
 
-	var CokEmoji = function(options, J_target){
-		var cokEmoji = this;
+    var CokEmoji = function(options, J_target) {
+        var cokEmoji = this;
 
         cokEmoji.options = util.fillSmilies(options);
-		cokEmoji.html = template('dialog', cokEmoji.options);
+        cokEmoji.html = template('dialog', cokEmoji.options);
 
         //私有变量
-        var emojiRegex = new RegExp(':(' + cokEmoji.options.emojies.join('|') + '):', 'g'); 
+        var emojiRegex = new RegExp(':(' + cokEmoji.options.emojies.join('|') + '):', 'g');
 
         //选中标签
-        var selectTab = function(J_tab){
+        var selectTab = function(J_tab) {
 
-            var tabs = cokEmoji.EL.find('.tab-item');
-            var tab = J_tab;
-            tabs.removeClass('active');
-            tab.addClass('active');
+                var tabs = cokEmoji.EL.find('.tab-item');
+                var tab = J_tab;
+                tabs.removeClass('active');
+                tab.addClass('active');
 
-            var panels = cokEmoji.EL.find('.tab-pane');
-            panels.each(function(){
-                var panel = $(this);
-                if(panel.data('tab')===tab.data('tab')){
-                    panel.addClass('active');
-                    //第一次展现时加载背景图片
-                    if(!panel.data('loaded')){
-                        panel.find('.emoji img').each(function(){
-                            var J_img = $(this);
-                            J_img.attr('src', J_img.data('src'));
-                        });
-                        panel.data('loaded', true);
+                var panels = cokEmoji.EL.find('.tab-pane');
+                panels.each(function() {
+                    var panel = $(this);
+                    if (panel.data('tab') === tab.data('tab')) {
+                        panel.addClass('active');
+                        //第一次展现时加载背景图片
+                        if (!panel.data('loaded')) {
+                            panel.find('.emoji img').each(function() {
+                                var J_img = $(this);
+                                J_img.attr('src', J_img.data('src'));
+                            });
+                            panel.data('loaded', true);
+                        }
+                    } else {
+                        panel.removeClass('active');
                     }
-                }else{
-                    panel.removeClass('active');
-                }
-            });            
-        }
-        //定位，目前固定于触发元素的下方
-        var rePosition = function(){
+                });
+            }
+            //定位，目前固定于触发元素的下方
+        var rePosition = function() {
             var targetOffset = J_target.offset();
             var J_win = $(window);
 
-            var top = J_target.offset().top
-            , left = J_target.offset().left;
+            var top = J_target.offset().top,
+                left = J_target.offset().left;
 
             //在target右方出现
-            if(cokEmoji.options.position === 'right'){
-                top += J_target.height() / 2 - 20;
-                left += J_target.width() + 10;
-
-                var caretOffset = J_target.offset().top 
-                - cokEmoji.EL.offset().top;
-
-                cokEmoji.EL.find('.caret').css({top: caretOffset + 'px'});
+            if (cokEmoji.options.position === 'right') {
+                top += J_target.outerHeight() / 2 - 20;
+                left += J_target.outerWidth() + 10;
             }
             //在target下方出现
-            else{
-                top += J_target.height() + 10;
-                left += J_target.width() / 2 - 20;
+            else {
+                top += J_target.outerHeight() + 10;
+                left += J_target.outerWidth() / 2 - 20;
             }
 
-            if(left < 0){
-                left = 0;
+            //自动微调
+            if(top + cokEmoji.EL.outerHeight() > J_win.outerHeight() - 5){
+                top = J_win.outerHeight() - cokEmoji.EL.outerHeight() - 5;
             }
-            if(top < 0){
-                top = 0;
-            }
-
-
-            console.log('top='+top);
-            console.log('height='+cokEmoji.EL.height());
-            console.log('win='+J_win.height());
-
-
-
-            if(left + cokEmoji.EL.width() > J_win.width()){
-                //TODO
-            }
-            if(top + cokEmoji.EL.height() > J_win.height()){
-                cokEmoji.EL.css({ bottom: '0px', left: left + 'px'});
-                return;
+            if(left + cokEmoji.EL.outerWidth() > J_win.outerWidth() - 5){
+                top = J_win.outerWidth() - cokEmoji.EL.outerWidth() - 5;
             }
 
-            cokEmoji.EL.css({ top: top + 'px', left: left + 'px'});
+
+            cokEmoji.EL.css({
+                top: top + 'px',
+                left: left + 'px'
+            });
+
+
+
+            //调整caret位置
+            if (cokEmoji.options.position === 'right') {
+                var caretOffset = J_target.offset().top - cokEmoji.EL.offset().top;
+
+                cokEmoji.EL.find('.caret').css({
+                    top: caretOffset + 'px'
+                });
+            } else {
+                var caretOffset = J_target.offset().left - cokEmoji.EL.offset().left;
+
+                cokEmoji.EL.find('.caret').css({
+                    left: caretOffset + 'px'
+                });
+            }
+
         }
-        var autoHide = function(){
-            var childA = cokEmoji.EL.find('a')
-                ,childUL = cokEmoji.EL.find('ul')
-                ,childDiv = cokEmoji.EL.find('div');
+        var autoHide = function() {
+            var childA = cokEmoji.EL.find('a'),
+                childUL = cokEmoji.EL.find('ul'),
+                childDiv = cokEmoji.EL.find('div');
 
-            $(document).on('click', function(e){
+            $(document).on('click', function(e) {
                 e = window.event || e; // 兼容IE7
                 obj = $(e.srcElement || e.target);
-                var notHide = obj.is(J_target) 
-                    || obj.is(cokEmoji.EL) 
-                    || obj.is(childA)
-                    || obj.is(childUL)
-                    || obj.is(childDiv);
-                if (!notHide){
+                var notHide = obj.is(J_target) || obj.is(cokEmoji.EL) || obj.is(childA) || obj.is(childUL) || obj.is(childDiv);
+                if (!notHide) {
                     cokEmoji.hide();
                 }
             });
         }
 
         //DOM操作
-		J_target.append(cokEmoji.html);
-		cokEmoji.EL = J_target.find('.cok-emoji-wrapper');
+        J_target.append(cokEmoji.html);
+        cokEmoji.EL = J_target.find('.cok-emoji-wrapper');
+        //计算并设置高度为最高高度
+        var emojiHeight = 0;
+        for (var i in cokEmoji.options.smilies) {
+            var h = options.smilies[i].length / 10 * 40;
+            if(emojiHeight < h){
+                emojiHeight = h;
+            }
+        }
+        cokEmoji.EL.find('.tab-content').css({height: (emojiHeight + 1) + 'px'});
+
 
         //表情选择
-        cokEmoji.EL.find('.emoji').on('click', function(){
+        cokEmoji.EL.find('.emoji').on('click', function() {
             var emjEL = $(this);
             var emjName = emjEL.data('name');
             var emj = util.findEmoji(emjName, cokEmoji.options);
             var emjText = ':' + emjName + ':';
 
-            if(cokEmoji.options.onselected){
-                if(cokEmoji.options.autoparse === 'image'){
+            if (cokEmoji.options.onselected) {
+                if (cokEmoji.options.autoparse === 'image') {
                     content = cokEmoji.translate(emjText);
-                }else if (cokEmoji.options.autoparse === 'text'){
+                } else if (cokEmoji.options.autoparse === 'text') {
                     content = cokEmoji.translate(emjText, true);
-                }else{
+                } else {
                     content = emjText;
                 }
                 cokEmoji.options.onselected.call(cokEmoji, content, emj);
@@ -160,37 +169,36 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
             return false;
         });
         //页签改变
-        cokEmoji.EL.find('.tab-item').on('click', function(){
+        cokEmoji.EL.find('.tab-item').on('click', function() {
             var J_tab = $(this);
             selectTab(J_tab);
         });
 
 
-		//注入
-		J_target.data('cokEmoji', cokEmoji);
+        //注入
+        J_target.data('cokEmoji', cokEmoji);
 
 
         //API
-		cokEmoji.show = function(){
+        cokEmoji.show = function() {
+            cokEmoji.EL.removeClass('cok-hidden');
+            cokEmoji.EL.addClass('cok-show');
             rePosition();
-			cokEmoji.EL.removeClass('cok-hidden');
-			cokEmoji.EL.addClass('cok-show');
-            cokEmoji.EL.focus();
-		}
-		cokEmoji.hide = function(){
-			cokEmoji.EL.removeClass('cok-show');
-			cokEmoji.EL.addClass('cok-hidden');
-		}
-        //将包含Emoji的源字符串替换为image或text
-        cokEmoji.translate = function(input, isText){
-            
-            var output = input.replace(emojiRegex, function(text, name){
+        }
+        cokEmoji.hide = function() {
+                cokEmoji.EL.removeClass('cok-show');
+                cokEmoji.EL.addClass('cok-hidden');
+            }
+            //将包含Emoji的源字符串替换为image或text
+        cokEmoji.translate = function(input, isText) {
+
+            var output = input.replace(emojiRegex, function(text, name) {
                 var emoji = util.findEmoji(name, cokEmoji.options);
                 emoji.basepath = cokEmoji.options.basepath;
 
-                if(isText){
+                if (isText) {
                     return template('text-emoji', emoji);
-                }else{
+                } else {
                     return template('image-emoji', emoji);
                 }
             });
@@ -204,22 +212,22 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
         var firstTab = cokEmoji.EL.find('.tab-item:first');
         selectTab(firstTab);
         autoHide();
-	}
+    }
 
 
     $.fn.cokEmoji = function(options) {
         options = $.extend({}, $.cokEmoji.config, $.cokEmoji.options, options);
         this.each(function() {
-        	var J_target = $(this);
+            var J_target = $(this);
 
-        	var cokEmoji = J_target.data('cokEmoji');
-        	if(cokEmoji === undefined){
-        		cokEmoji = new CokEmoji(options, J_target);
-        	}
+            var cokEmoji = J_target.data('cokEmoji');
+            if (cokEmoji === undefined) {
+                cokEmoji = new CokEmoji(options, J_target);
+            }
 
-        	J_target.on('click', function(){
-        		cokEmoji.show();
-        	});
+            J_target.on('click', function() {
+                cokEmoji.show();
+            });
 
             $.cokEmoji.cache(cokEmoji.options.name, cokEmoji);
             return cokEmoji;
@@ -230,27 +238,27 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
     $.cokEmoji = {};
 
     $.cokEmoji.cacheStore = {};
-    $.cokEmoji.cache = function(key, val){
-        if(val != undefined && val != null){
+    $.cokEmoji.cache = function(key, val) {
+        if (val != undefined && val != null) {
             $.cokEmoji.cacheStore[key] = val;
-        }else{
+        } else {
             return $.cokEmoji.cacheStore[key];
         }
     }
 
     $.cokEmoji.options = {
-		basepath: 'images/smilies/',
+        basepath: 'images/smilies/',
         //image、text、emoji or none
-    	autoparse: 'emoji',
-		appendto: 'textArea',
+        autoparse: 'emoji',
+        appendto: 'textArea',
         position: 'down',
-        onselected: function(emjtext, emj){
+        onselected: function(emjtext, emj) {
             var cokEmoji = this;
-            if(cokEmoji.options.autoparse === 'none'){
+            if (cokEmoji.options.autoparse === 'none') {
                 return;
             }
             var J_appendto = $(cokEmoji.options.appendto);
-            if(J_appendto.length === 0){
+            if (J_appendto.length === 0) {
                 return;
             }
             J_appendto.append(emjtext);
@@ -263,6 +271,7 @@ a("text-emoj",function(a){"use strict";var b=this,c=(b.$helpers,b.$escape),d=a.t
 
 
 }(jQuery));
+
 var cokEmoji = angular.module('cokjs.emoji', []);
 
 cokEmoji.config(['$provide',
