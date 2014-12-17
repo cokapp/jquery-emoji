@@ -13,9 +13,9 @@ codeurl: 'https://github.com/cokapp/jquery-emoji'
 
 # Default categories (in order) to appear in the navigation
 sections: [
-    ['doc', '文档'],
+    ['demo', '在线演示'],
     ['tut', '如何使用'],
-    ['ref', 'Reference'],
+    ['doc', '文档'],
     ['dev', '关于'],
     ['post', 'Posts']
 ]
@@ -28,7 +28,7 @@ baseurl: '/jquery-emoji'
 permalink: none
 
 # Syntax highlighting
-highlighter: 'pygments'
+highlighter: 'rouge'
 
 # Since these are pages, it doesn't really matter
 future: true

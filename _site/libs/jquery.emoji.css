@@ -23,12 +23,11 @@
 .cok-emoji-wrapper {
     position: absolute;
     border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 9999;
-    cursor: default;
+    padding: 10px !important;
     background: #fff !important;
 }
-.cok-emoji-wrapper * {
+.cok-emoji-wrapper, .cok-emoji-wrapper * {
+    box-sizing: content-box;
     margin: 0;
     padding: 0;
     text-decoration: none !important;
