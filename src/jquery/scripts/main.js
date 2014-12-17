@@ -1,5 +1,12 @@
 (function() {
 
+
+    var selfPath = function() {
+        var js = document.scripts,
+            jsPath = js[js.length - 1].src;
+        return jsPath.substring(0, jsPath.lastIndexOf("/") + 1);
+    }();
+
     var util = {};
     util.fillSmilies = function(options) {
         for (var i in options.smilies) {
@@ -24,7 +31,8 @@
 
     var CokEmoji = function(options, J_target) {
         var cokEmoji = this;
-
+        options.fullpath = selfPath + options.basepath;
+        
         cokEmoji.options = util.fillSmilies(options);
         cokEmoji.html = template('dialog', cokEmoji.options);
 
@@ -185,7 +193,7 @@
 
             var output = input.replace(emojiRegex, function(text, name) {
                 var emoji = util.findEmoji(name, cokEmoji.options);
-                emoji.basepath = cokEmoji.options.basepath;
+                emoji.fullpath = cokEmoji.options.fullpath;
 
                 if (isText) {
                     return template('text-emoji', emoji);

@@ -1,6 +1,6 @@
-/*TMODJS:{"version":42,"md5":"eb9a27724017b6d770ff86a55a040025"}*/
+/*TMODJS:{"version":43,"md5":"b6d500d97e9c58f9f20e64b9027ff687"}*/
 template('dialog',function($data,$filename) {
-'use strict';var $utils=this,$helpers=$utils.$helpers,$escape=$utils.$escape,position=$data.position,$each=$utils.$each,tabs=$data.tabs,tab=$data.tab,tabIndex=$data.tabIndex,smilies=$data.smilies,smily=$data.smily,smilyIndex=$data.smilyIndex,basepath=$data.basepath,$out='';$out+=' <div class="cok-emoji-wrapper cok-hidden"> <div class="caret caret-';
+'use strict';var $utils=this,$helpers=$utils.$helpers,$escape=$utils.$escape,position=$data.position,$each=$utils.$each,tabs=$data.tabs,tab=$data.tab,tabIndex=$data.tabIndex,smilies=$data.smilies,smily=$data.smily,smilyIndex=$data.smilyIndex,fullpath=$data.fullpath,$out='';$out+=' <div class="cok-emoji-wrapper cok-hidden"> <div class="caret caret-';
 $out+=$escape(position);
 $out+='"> <div></div> </div> <ul class="tab-nav cok-clearfix"> ';
 $each(tabs,function(tab,tabIndex){
@@ -33,7 +33,7 @@ if(smily.name){
 $out+=' <td data-name="';
 $out+=$escape(smily.name);
 $out+='" class="emoji"> <img data-src="';
-$out+=$escape(basepath);
+$out+=$escape(fullpath);
 $out+=$escape(smily.image);
 $out+='" alt="';
 $out+=$escape(smily.title);
