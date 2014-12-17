@@ -31,8 +31,8 @@
 
     var CokEmoji = function(options, J_target) {
         var cokEmoji = this;
-        options.fullpath = selfPath + options.basepath;
-        
+        options.fullpath = selfPath + 'images/smilies/';
+
         cokEmoji.options = util.fillSmilies(options);
         cokEmoji.html = template('dialog', cokEmoji.options);
 
@@ -137,7 +137,7 @@
         //计算并设置高度为最高高度
         var emojiHeight = 0;
         for (var i in cokEmoji.options.smilies) {
-            var h = options.smilies[i].length / 10 * 40;
+            var h = options.smilies[i].length / 10 * 40 + 20;
             if(emojiHeight < h){
                 emojiHeight = h;
             }
@@ -190,6 +190,13 @@
             }
             //将包含Emoji的源字符串替换为image或text
         cokEmoji.translate = function(input, isText) {
+            if(input === undefined || input === null){
+                return '';
+            }
+
+            if(typeof input !== 'String'){
+                input = input.toString();
+            }
 
             var output = input.replace(emojiRegex, function(text, name) {
                 var emoji = util.findEmoji(name, cokEmoji.options);
@@ -246,7 +253,6 @@
     }
 
     $.cokEmoji.options = {
-        basepath: 'images/smilies/',
         //image、text、emoji or none
         autoparse: 'emoji',
         appendto: 'textArea',

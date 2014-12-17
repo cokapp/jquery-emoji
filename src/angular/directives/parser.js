@@ -8,6 +8,7 @@ angular.module('cokjs.emoji')
                 emoji: '=emojiBind'
             },
             link: function($scope, el, attrs) {
+                $scope.emoji = '';
                 $scope.$watch('emoji', function(newValue, oldValue) {
                     if (!cokEmoji) {
                         cokEmoji = $.cokEmoji.cache(attrs.emojiParser);
