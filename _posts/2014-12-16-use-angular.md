@@ -12,8 +12,8 @@ order: 1
 ```html
 	<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
 	<script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="{{ site.baseurl }}/libs/jquery.emoji.css">
-	<script src="{{ site.baseurl }}/libs/angular.emoji.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="http://cokapp.github.io/jquery-emoji/libs/jquery.emoji.css">
+	<script src="http://cokapp.github.io/jquery-emoji/libs/angular.emoji.js" type="text/javascript"></script>
 ```
 
 ####初始化
