@@ -1,4 +1,4 @@
-/*TMODJS:{"version":43,"md5":"b6d500d97e9c58f9f20e64b9027ff687"}*/
+/*TMODJS:{"version":44,"md5":"676bfe386b63c6812350ed351b14aac8"}*/
 template('dialog',function($data,$filename) {
 'use strict';var $utils=this,$helpers=$utils.$helpers,$escape=$utils.$escape,position=$data.position,$each=$utils.$each,tabs=$data.tabs,tab=$data.tab,tabIndex=$data.tabIndex,smilies=$data.smilies,smily=$data.smily,smilyIndex=$data.smilyIndex,fullpath=$data.fullpath,$out='';$out+=' <div class="cok-emoji-wrapper cok-hidden"> <div class="caret caret-';
 $out+=$escape(position);
